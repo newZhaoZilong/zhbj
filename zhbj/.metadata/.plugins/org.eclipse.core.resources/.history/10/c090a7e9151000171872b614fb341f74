@@ -1,0 +1,13 @@
+
+public class test2 extends test1{
+
+	public test2() {
+		
+	}
+	
+	public void eat(hahaha ha) {
+		
+		super.eat(ha);
+	}
+	
+}

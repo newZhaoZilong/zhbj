@@ -1,0 +1,56 @@
+package com.shange.zhbj.utils;
+
+import android.os.AsyncTask;
+import android.widget.ImageView;
+
+public class NetCacheUtils {
+	
+	ImageView mImageView;
+
+	public void getBitmapFromNet(ImageView imageView, String url) {
+		
+		mImageView = imageView;
+		//AsyncTack 异步封装的工具,可以实现异步请求及主界面更新(对线程池+handler的封装)
+		new BitmapTack().execute();//启动asyncTask
+	}
+	/**
+	 * @author 山哥
+	 *三个泛型的意义:第一个泛型:doInBackground里的参数类型
+	 *第二个泛型:onProgressUpdate里的参数类型
+	 *第三个泛型:onPostExecute里的参数类型及doInBackground的返回类型
+	 *
+	 *
+	 */
+	class BitmapTack extends AsyncTask<Object, Integer, ImageView>{
+		
+		//1.预加载,运行在主线程
+		@Override
+		protected void onPreExecute() {
+			System.out.println("onPreExecute");
+			super.onPreExecute();
+		}
+		//2.正在加载,运行在子线程(核心方法),可以直接异步请求
+		@Override
+		protected ImageView doInBackground(Object... params) {
+			System.out.println("doInBackground");
+			
+			return mImageView;
+		}
+		//3.跟新进度的方法,运行在主线程
+		@Override
+		protected void onProgressUpdate(Integer... values) {
+			System.out.println("onProgressUpdate");
+			super.onProgressUpdate(values);
+		}
+		
+		//4.加载结束,运行在主线程(核心方法),可以直接更新UI
+		@Override
+		protected void onPostExecute(ImageView result) {
+			System.out.println("onPostExecute");
+			super.onPostExecute(result);
+		}
+		
+		
+	}
+
+}

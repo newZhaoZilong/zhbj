@@ -1,0 +1,17 @@
+import sun.font.EAttribute;
+
+
+public class test2 extends test1{
+
+	
+	
+	public static void main(String[] args){
+		
+		
+	}
+	private static void eat() {
+		
+
+	}
+	
+}

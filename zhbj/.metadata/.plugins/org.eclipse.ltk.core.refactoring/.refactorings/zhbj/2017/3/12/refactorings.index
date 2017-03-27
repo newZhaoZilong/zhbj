@@ -1,0 +1,35 @@
+1489906160907	Convert local variable 'lv_list' to field
+1489907384754	Rename resource 'txt_menu_selector.xml'
+1489907460028	Copy file
+1489909961195	Convert local variable 'leftMenuAdapter' to field
+1489910086815	Rename field 'leftMenuAdapter'
+1489916131740	Copy compilation unit
+1489916148421	Copy compilation unit
+1489916154384	Copy compilation unit
+1489916183388	Rename type 'DetailPager'
+1489920365449	Rename type 'PhotoMenuDetailPager'
+1489921227726	Convert local variable 'newsMenu' to field
+1489960448168	Convert local variable 'view' to field
+1490013593418	Rename type 'NewTabBean'
+1490013617548	Rename type 'SpUtil'
+1490033527567	Convert local variable 'mUrl' to field
+1490034576608	Convert local variable 'bitmapUtils' to field
+1490034750648	Rename field 'bitmapUtils'
+1490038773750	Convert local variable 'startY' to field
+1490038779413	Convert local variable 'startX' to field
+1490052600393	Convert local variable 'mBitmapUtils' to field
+1490220145726	Convert local variable 'mHeadView' to field
+1490220963551	Convert local variable 'measuredHeight' to field
+1490221260713	Convert local variable 'startY' to field
+1490222272643	Convert local variable 'tvTitle' to field
+1490222277309	Convert local variable 'tvTime' to field
+1490222281587	Convert local variable 'ivArrow' to field
+1490222430741	Convert local variable 'rotateUpAnim' to field
+1490222600567	Convert local variable 'rotateDownAnim' to field
+1490222813555	Rename field 'measuredHeight'
+1490222946329	Convert local variable 'pbProgress' to field
+1490305000173	Rename field 'pull_to_refresh_foot'
+1490305014779	Convert local variable 'mFooterView' to field
+1490305079316	Convert local variable 'mFooterViewHeight' to field
+1490309202589	Convert local variable 'mMoreUrl' to field
+1490309916094	Convert local variable 'mNewsAdapter' to field

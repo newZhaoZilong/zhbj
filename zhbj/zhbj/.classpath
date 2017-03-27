@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="gen"/>
+	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
+	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
+	<classpathentry exported="true" kind="lib" path="/SlidingMenuLibrary/libs/android-support-v4.jar" sourcepath="D:/SDK/extras/android/m2repository/com/android/support/support-v4/18.0.0/support-v4-18.0.0-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/gson-2.3.1.jar" sourcepath="D:/BaiduYunDownload/Android74期/黑马Android74期/06_智慧北京(day44-day50)/day01/day01/Day01资料/开源框架/Gson/gson-2.3.1.jar"/>
+	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
+	<classpathentry kind="output" path="bin/classes"/>
+</classpath>

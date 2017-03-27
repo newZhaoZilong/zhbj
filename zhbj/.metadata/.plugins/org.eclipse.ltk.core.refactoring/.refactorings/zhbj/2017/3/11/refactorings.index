@@ -1,0 +1,44 @@
+1489622366509	Delete element
+1489622402897	Rename type 'MainActivity'
+1489622434929	Rename field 'activity_main'
+1489623248432	Convert local variable 'activity_splash' to field
+1489624320977	Delete element
+1489624338842	Delete element
+1489624370943	Delete element
+1489625950372	Convert local variable 'mViewPager' to field
+1489626661900	Convert local variable 'imageList' to field
+1489627164033	Rename field 'imageList'
+1489641820466	Convert local variable 'll_container' to field
+1489642979838	Rename local variable 'imageView2'
+1489643369350	Copy file
+1489644579616	Convert local variable 'mPointDis' to field
+1489644942832	Convert local variable 'iv_red_point' to field
+1489688017621	Convert local variable 'btn_start' to field
+1489688806999	Rename resource 'btn_guide_selector.xml'
+1489690064434	Copy file
+1489691950449	Delete element
+1489714714412	Convert local variable 'mActivity' to field
+1489718383793	Copy file
+1489718413021	Rename resource 'fragment_content'
+1489719998234	Extract constant 'TAG_LEFT_MENU'
+1489720009093	Extract constant 'TAG_CONTENT'
+1489722880243	Copy file
+1489722891823	Rename resource 'selector_tab_home'
+1489771421331	Copy file
+1489771536012	Copy file
+1489771582855	Copy file
+1489771625299	Copy file
+1489772668996	Copy file
+1489772688257	Rename resource 'selector_txt_guide.xml'
+1489789788018	Convert local variable 'tv_title' to field
+1489789792168	Convert local variable 'btn_menu' to field
+1489789795722	Convert local variable 'fl_content' to field
+1489791172037	Copy compilation unit
+1489791187910	Copy compilation unit
+1489791198011	Copy compilation unit
+1489791219091	Copy compilation unit
+1489828722143	Convert local variable 'vp_content' to field
+1489829703952	Convert local variable 'mPagers' to field
+1489831395984	Delete element
+1489831720297	Convert local variable 'rg_group' to field
+1489855838300	Rename local variable 'result'

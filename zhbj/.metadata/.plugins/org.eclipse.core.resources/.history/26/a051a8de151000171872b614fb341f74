@@ -1,0 +1,16 @@
+
+public class test1 {
+
+	public test1() {
+		
+	}
+	public interface hahaha{
+		
+		public void show();
+	}
+	public void eat(hahaha ha){
+		
+		System.out.println("接口能被继承吗?");
+	}
+
+}

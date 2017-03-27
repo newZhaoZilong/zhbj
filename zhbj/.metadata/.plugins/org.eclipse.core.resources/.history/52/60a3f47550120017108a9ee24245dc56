@@ -1,0 +1,8 @@
+package com.shange.zhbj.domain;
+
+public class PhotoMenu {
+
+	public PhotosData data;
+	
+	
+}

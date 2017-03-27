@@ -1,0 +1,32 @@
+package com.shange.zhbj.base.impl.menu;
+
+import android.app.Activity;
+import android.graphics.Color;
+import android.view.Gravity;
+import android.view.View;
+import android.widget.TextView;
+
+import com.shange.zhbj.R;
+import com.shange.zhbj.base.BaseMenuDetailPager;
+
+/**
+ * @author 山哥
+ *菜单详情页-组图
+ *
+ *
+ */
+public class PhotosMenuDetailPager extends BaseMenuDetailPager {
+
+	public PhotosMenuDetailPager(Activity activity) {
+		super(activity);
+		
+	}
+
+	@Override
+	public View initView() {
+		View view = View.inflate(mActivity, R.layout.pager_photo_menu_detail, null);
+		
+		return view;
+	}
+
+}

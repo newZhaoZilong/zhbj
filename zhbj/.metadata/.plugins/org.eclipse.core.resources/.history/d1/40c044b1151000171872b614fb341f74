@@ -1,0 +1,12 @@
+
+public class test1 {
+
+	public test1() {
+		
+	}
+	public interface hahaha{
+		
+		public void show();
+	}
+
+}

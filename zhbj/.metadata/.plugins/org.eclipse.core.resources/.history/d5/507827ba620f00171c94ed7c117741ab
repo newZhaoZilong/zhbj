@@ -1,0 +1,300 @@
+package com.shange.zhbj.base.impl.menu;
+
+import java.util.ArrayList;
+
+import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.text.TextUtils;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.ImageView.ScaleType;
+import android.widget.BaseAdapter;
+import android.widget.ListView;
+
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.gson.Gson;
+import com.lidroid.xutils.BitmapUtils;
+import com.lidroid.xutils.HttpUtils;
+import com.lidroid.xutils.ViewUtils;
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
+import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
+import com.lidroid.xutils.view.annotation.ViewInject;
+import com.shange.zhbj.R;
+import com.shange.zhbj.base.BaseMenuDetailPager;
+import com.shange.zhbj.domain.NewsTabBean;
+import com.shange.zhbj.domain.NewsMenu.NewsTabData;
+import com.shange.zhbj.domain.NewsTabBean.NewsData;
+import com.shange.zhbj.domain.NewsTabBean.TopNews;
+import com.shange.zhbj.global.GlobalConstant;
+import com.shange.zhbj.utils.CacheUtils;
+import com.shange.zhbj.view.PullToRefreshListView;
+import com.shange.zhbj.view.PullToRefreshListView.OnRefreshListener;
+import com.shange.zhbj.view.TopNewsViewPager;
+import com.viewpagerindicator.CirclePageIndicator;
+
+/**
+ * @author 山哥
+ *页签页面对象
+ */
+public class TabDetailPager extends BaseMenuDetailPager{
+
+	public static final String tag = "TabDetailPager";
+	private NewsTabData mTabData;//单个页签的网络数据
+	//private TextView view;
+	@ViewInject(R.id.vp_top_news)
+	private TopNewsViewPager mViewPager;
+	private String mUrl;
+	private ArrayList<TopNews> mTopNewsList;
+	@ViewInject(R.id.tv_title)
+	private TextView tvTitle;
+	@ViewInject(R.id.indicator)
+	private CirclePageIndicator mIndicator;
+	
+	@ViewInject(R.id.lv_list)
+	private PullToRefreshListView mListView;
+	
+	private ArrayList<NewsData> mNewsList;
+	
+	public TabDetailPager(Activity activity, NewsTabData newsTabData) {
+		super(activity);//这里已经初始化,view了,肯定会报空指针
+		mTabData = newsTabData;
+		mUrl = GlobalConstant.SERVER_URL+mTabData.url;
+		Log.i(tag, mUrl);
+		
+	}
+
+	@Override
+	public View initView() {
+		//要给帧布局填充布局对象
+	/*	view = new TextView(mActivity);
+		//view.setText(mTabData.title);
+		view.setTextColor(Color.RED);
+		view.setTextSize(22);
+		view.setGravity(Gravity.CENTER);*/
+		View view = View.inflate(mActivity, R.layout.pager_tab_detail, null);
+		ViewUtils.inject(this, view);//这个view帮助找到listview
+		//给listview添加头布局
+		View mHeaderView = View.inflate(mActivity, R.layout.list_item_header, null);
+		ViewUtils.inject(this, mHeaderView);//这个view帮助找到textview,imageview等
+		mListView.addHeaderView(mHeaderView);
+		//5.前段界面设置回调
+		mListView.setOnRefreshListener(new OnRefreshListener() {
+			
+			@Override
+			public void onRefresh() {
+				//刷新数据
+				getDataFromServer();
+			}
+		});
+		
+		return view;
+	}
+	public void initData(){
+		
+	//	view.setText(mTabData.title);
+		String cache = CacheUtils.getCache(mUrl, mActivity);//根据键获取缓存
+		if(!TextUtils.isEmpty(cache)){
+			processData(cache);
+		}
+		getDataFromServer();
+	}
+	private void getDataFromServer(){
+		HttpUtils utils = new HttpUtils();
+		utils.send(HttpMethod.GET, mUrl, new RequestCallBack<String>() {
+
+			@Override
+			public void onSuccess(ResponseInfo<String> responseInfo) {
+				String result = responseInfo.result;
+				processData(result);
+				Log.i(tag, result);
+				CacheUtils.putCache(mUrl, result, mActivity);//存入sheredPreference
+				//收起下拉刷新事件;
+		//		mListView.onRefreshComplete();//那失败呢?
+			}
+
+			@Override
+			public void onFailure(HttpException error, String msg) {
+				error.printStackTrace();
+				Toast.makeText(mActivity, msg, 0).show();
+			//	mListView.onRefreshComplete();//
+			}
+		});
+		
+	}
+	
+	/**
+	 * 加工数据
+	 * @param result
+	 */
+	protected void processData(String result) {
+		//一旦获取到数据,无论是缓存里的还是服务器里的,gson自动赋值给NewsTabBean
+		Gson gson = new Gson();
+		NewsTabBean newsTabBean = gson.fromJson(result, NewsTabBean.class);
+		//先搞头条新闻,头条新闻是用viewpager做的
+		//填充好集合
+		mTopNewsList = newsTabBean.data.topnews;
+		if(mTopNewsList!=null){
+			/*String imageUrl = mTopNewsList.get(0).topimage;
+			Log.i(tag, "imageUrl---------------"+imageUrl);*/
+			mViewPager.setAdapter(new TopNewsAdapter());
+			mIndicator.setViewPager(mViewPager);//什么监听方法,都要设置给指示器
+			mIndicator.setSnap(true);//快照方式展示
+			mIndicator.setOnPageChangeListener(new OnPageChangeListener() {
+				
+				@Override
+				public void onPageSelected(int position) {
+					//更新头条新闻标题
+					TopNews topNews = mTopNewsList.get(position);
+					tvTitle.setText(topNews.title);
+					
+				}
+				
+				@Override
+				public void onPageScrolled(int position, float positionOffset,
+						int positionOffsetPixels) {
+					
+					
+				}
+				
+				@Override
+				public void onPageScrollStateChanged(int state) {
+					
+					
+				}
+			});
+			tvTitle.setText(mTopNewsList.get(0).title);//初始化第一条
+		
+		}
+		mNewsList = newsTabBean.data.news;
+		if(mNewsList!=null){
+			
+			mListView.setAdapter(new NewsAdapter());
+		}
+		
+	}
+
+	class TopNewsAdapter extends PagerAdapter{
+
+		private BitmapUtils mBitmapUtils;
+
+		public TopNewsAdapter() {
+			mBitmapUtils = new BitmapUtils(mActivity);
+			//设置加载中的默认图片
+			mBitmapUtils.configDefaultLoadingImage(R.drawable.topnews_item_default);
+			
+		}
+		@Override
+		public int getCount() {
+			
+			return mTopNewsList.size();
+		}
+
+		@Override
+		public boolean isViewFromObject(View view, Object object) {
+			boolean test = (view == object);
+			
+			Log.i(tag,String.valueOf(test));
+			return view == object;
+		}
+		
+		
+		
+		@Override
+		public Object instantiateItem(ViewGroup container, int position) {
+			//这个方法很重要,viewPager里面都是图片
+			ImageView view = new ImageView(mActivity);
+			view.setScaleType(ScaleType.FIT_XY);//设置缩放类型
+		//	view.setImageResource(R.drawable.topnews_item_default);
+			//下载图片-将图片设置给imageView-避免内存溢出-缓存
+			String imageUrl = mTopNewsList.get(position).topimage;
+			String[] split = imageUrl.split("zhbj");
+			imageUrl = GlobalConstant.SERVER_URL+split[1];//老子重新改地址
+			Log.i(tag, imageUrl);
+			mBitmapUtils.display(view, imageUrl);//view,填充图片的容器,imageUrl,url地址
+			//一定记得要添加view
+			container.addView(view);
+			
+			return view;
+		}
+		@Override
+		public void destroyItem(ViewGroup container, int position, Object object) {
+			//删除通过instantiateItem被返回的相同的对象,也就是说,
+			container.removeView((View)object);
+		}
+		
+	}
+	
+	class NewsAdapter extends BaseAdapter{
+
+		private BitmapUtils mBitmapUtils;
+
+		public NewsAdapter(){
+			mBitmapUtils = new BitmapUtils(mActivity);
+			//设置默认图片
+			mBitmapUtils.configDefaultLoadingImage(R.drawable.news_pic_default);
+		}
+		@Override
+		public int getCount() {
+			
+			return mNewsList.size();
+		}
+
+		@Override
+		public NewsData getItem(int position) {
+			
+			return mNewsList.get(position);
+		}
+
+		@Override
+		public long getItemId(int position) {
+			
+			return position;
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			ViewHolder holder;
+			if(convertView == null){
+				convertView = View.inflate(mActivity, R.layout.list_item_news, null);
+				holder = new ViewHolder();
+				holder.ivIcon = (ImageView) convertView.findViewById(R.id.iv_icon);
+				holder.tvTitle = (TextView) convertView.findViewById(R.id.tv_title);
+				holder.tvDate = (TextView) convertView.findViewById(R.id.tv_date);
+				convertView.setTag(holder);
+				
+			}else{
+				holder = (ViewHolder)convertView.getTag();
+			}
+			NewsData news = getItem(position);//获取news对象
+			//赋值
+			holder.tvTitle.setText(news.title);
+			holder.tvDate.setText(news.pubdate);
+			String url = news.listimage;
+			String[] split = url.split("/zhbj");
+			
+			mBitmapUtils.display(holder.ivIcon, GlobalConstant.SERVER_URL+split[1]);
+			
+			return convertView;
+		}
+		
+		
+	}
+	static class ViewHolder{
+		public ImageView ivIcon;
+		public TextView tvTitle;
+		public TextView tvDate;
+		
+	}
+	
+}

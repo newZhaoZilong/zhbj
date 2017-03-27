@@ -1,0 +1,13 @@
+
+public class test3 {
+
+	public static void main(String[] args){
+		
+		Integer a = new Integer(3);
+		Integer b = new Integer(5);
+		
+		System.out.println(a);
+		System.out.println(b);
+		
+	}
+}

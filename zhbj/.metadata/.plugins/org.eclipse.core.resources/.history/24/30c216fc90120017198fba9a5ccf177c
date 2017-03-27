@@ -1,0 +1,44 @@
+package com.shange.zhbj.utils;
+
+import android.os.AsyncTask;
+import android.widget.ImageView;
+
+public class NetCacheUtils {
+
+	public void getBitmapFromNet(ImageView imageView, String url) {
+	
+		//AsyncTack 异步封装的工具,可以实现异步请求及主界面更新(对线程池+handler的封装)
+		new BitmapTack().execute();//启动asyncTask
+	}
+	class BitmapTack extends AsyncTask<Void, Void, Void>{
+		
+		//预加载,运行在主线程
+		@Override
+		protected void onPreExecute() {
+			
+			super.onPreExecute();
+		}
+		//正在加载,运行在子线程(核心方法),可以直接异步请求
+		@Override
+		protected Void doInBackground(Void... params) {
+			
+			return null;
+		}
+		//跟新进度的方法,运行在主线程
+		@Override
+		protected void onProgressUpdate(Void... values) {
+			
+			super.onProgressUpdate(values);
+		}
+		
+		//加载结束,运行在主线程(核心方法),可以直接更新UI
+		@Override
+		protected void onPostExecute(Void result) {
+			
+			super.onPostExecute(result);
+		}
+		
+		
+	}
+
+}
