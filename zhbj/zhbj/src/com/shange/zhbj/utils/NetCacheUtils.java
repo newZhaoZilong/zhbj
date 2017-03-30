@@ -14,13 +14,18 @@ import android.widget.ImageView;
 
 public class NetCacheUtils {
 	
-	ImageView mImageView;
-	String mUrl;
+	private LocalCaheUtils mLocalCaheUtils;
+	
+	private MemoryCacheUtils mMemoryCacheUtils;
+	
+	public NetCacheUtils(LocalCaheUtils localCaheUtils,MemoryCacheUtils memoryCacheUtils){
+		mLocalCaheUtils = localCaheUtils;
+		mMemoryCacheUtils = memoryCacheUtils;
+	}
 
 	public void getBitmapFromNet(ImageView imageView, String url) {
 		
-		mImageView = imageView;
-		mUrl = url;
+		//
 		//AsyncTack 异步封装的工具,可以实现异步请求及主界面更新(对线程池+handler的封装)
 		new BitmapTack().execute(imageView,url);//启动asyncTask
 	}
@@ -33,8 +38,9 @@ public class NetCacheUtils {
 	 *
 	 */
 	class BitmapTack extends AsyncTask<Object, Integer, Bitmap>{
+		private ImageView mImageView;
+		private String mUrl;
 		
-		private ImageView imageView;
 		//1.预加载,运行在主线程
 		@Override
 		protected void onPreExecute() {
@@ -48,10 +54,10 @@ public class NetCacheUtils {
 			//publishProgress(values)调用此方法实现进度更新(会调用onProgressUpdate)
 			//在子线程中更新进度应该会用到此方法,感觉没屌用啊,进度条本来就可以再子线程中更新
 			
-			imageView = (ImageView)params[0];
-			String url = (String)params[1];//打标记,将当前imageview和url绑定在了一起
+			mImageView = (ImageView)params[0];
+			mUrl = (String)params[1];//打标记,将当前imageview和url绑定在了一起
 			
-			imageView.setTag(url);
+			mImageView.setTag(mUrl);
 			
 			
 			Bitmap bitmap =  download(mUrl);
@@ -72,12 +78,17 @@ public class NetCacheUtils {
 				//给imageView设置图片
 				//由于listview的重用机制导致imageview对象可能被多个item共用,从而可能将错误的图片设置给imageview对象
 				//所以需要在此处校验,判断是否是正确的图片
-				String url = (String) imageView.getTag();
+				String url = (String) mImageView.getTag();
 				if(url.equals(mUrl)){//判断图片绑定的url是否就是对当前bitmap的url
-					imageView.setImageBitmap(result);
+					mImageView.setImageBitmap(result);
+					
+					//写本地缓存
+					mLocalCaheUtils.setLocalCache(url, result);
+					//写内存缓存
+					mMemoryCacheUtils.setMemoryCache(url,result);
+					
 				}
 				
-				mImageView.setImageBitmap(result);
 			}
 			
 			super.onPostExecute(result);
@@ -94,7 +105,7 @@ public class NetCacheUtils {
 			//打开连接
 			openConnection = (HttpURLConnection) url2.openConnection();
 			
-			
+			openConnection.setRequestMethod("GET");
 			openConnection.setConnectTimeout(5000);//设置连接超时时间
 			openConnection.setReadTimeout(5000);//设置读取超时时间
 			openConnection.connect();//连接网络

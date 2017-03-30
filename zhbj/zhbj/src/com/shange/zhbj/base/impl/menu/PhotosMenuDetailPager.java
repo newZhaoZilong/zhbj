@@ -138,11 +138,11 @@ public class PhotosMenuDetailPager extends BaseMenuDetailPager {
 
 	class MyAdapter extends BaseAdapter{
 
-	//	private BitmapUtils  mbitmap;
+		//	private BitmapUtils  mbitmap;
 		private MyBitmapUtils  mbitmap;
 		public MyAdapter(){
 
-		//	mbitmap = new BitmapUtils(mActivity);
+			//	mbitmap = new BitmapUtils(mActivity);
 			mbitmap = new MyBitmapUtils();//自己的太慢
 			
 			//mbitmap.configDefaultLoadingImage(R.drawable.image_demo);//配置默认图片

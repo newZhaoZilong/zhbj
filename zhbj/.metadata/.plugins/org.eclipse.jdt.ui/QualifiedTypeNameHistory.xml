@@ -1,17 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="android.widget.AbsListView.OnScrollListener"/>
-<fullyQualifiedTypeName name="com.shange.zhbj.view.PullToRefreshListView"/>
-<fullyQualifiedTypeName name="com.shange.zhbj.view.PullToRefreshListView.OnRefreshListener"/>
-<fullyQualifiedTypeName name="android.widget.AdapterView.OnItemClickListener"/>
-<fullyQualifiedTypeName name="com.shange.zhbj.utils.SpUtils"/>
-<fullyQualifiedTypeName name="android.widget.LinearLayout"/>
-<fullyQualifiedTypeName name="android.view.View"/>
-<fullyQualifiedTypeName name="android.content.Intent"/>
-<fullyQualifiedTypeName name="android.webkit.WebView"/>
-<fullyQualifiedTypeName name="android.webkit.WebViewClient"/>
-<fullyQualifiedTypeName name="android.util.Log"/>
-<fullyQualifiedTypeName name="android.widget.ProgressBar"/>
 <fullyQualifiedTypeName name="android.webkit.WebChromeClient"/>
 <fullyQualifiedTypeName name="com.shange.zhbj.NewsDetailActivity"/>
 <fullyQualifiedTypeName name="android.app.AlertDialog"/>
@@ -25,7 +13,6 @@
 <fullyQualifiedTypeName name="android.view.View.OnTouchListener"/>
 <fullyQualifiedTypeName name="android.view.MotionEvent"/>
 <fullyQualifiedTypeName name="java.lang.Runnable"/>
-<fullyQualifiedTypeName name="com.shange.zhbj.R"/>
 <fullyQualifiedTypeName name="com.shange.zhbj.R.layout"/>
 <fullyQualifiedTypeName name="android.widget.ListView"/>
 <fullyQualifiedTypeName name="com.lidroid.xutils.view.annotation.ViewInject"/>
@@ -52,12 +39,25 @@
 <fullyQualifiedTypeName name="android.os.AsyncTask"/>
 <fullyQualifiedTypeName name="com.shange.zhbj.utils.NetCacheUtils.BitmapTack"/>
 <fullyQualifiedTypeName name="android.widget.ImageView"/>
-<fullyQualifiedTypeName name="android.graphics.Bitmap"/>
 <fullyQualifiedTypeName name="java.net.URI"/>
 <fullyQualifiedTypeName name="java.net.URL"/>
 <fullyQualifiedTypeName name="java.net.HttpURLConnection"/>
-<fullyQualifiedTypeName name="android.graphics.BitmapFactory"/>
 <fullyQualifiedTypeName name="java.lang.System"/>
 <fullyQualifiedTypeName name="java.lang.Integer"/>
 <fullyQualifiedTypeName name="com.shange.zhbj.utils.MyBitmapUtils"/>
+<fullyQualifiedTypeName name="android.os.Environment"/>
+<fullyQualifiedTypeName name="java.io.File"/>
+<fullyQualifiedTypeName name="com.shange.zhbj.utils.Md5Util"/>
+<fullyQualifiedTypeName name="android.graphics.Bitmap.CompressFormat"/>
+<fullyQualifiedTypeName name="java.io.FileOutputStream"/>
+<fullyQualifiedTypeName name="android.graphics.BitmapFactory"/>
+<fullyQualifiedTypeName name="java.io.FileInputStream"/>
+<fullyQualifiedTypeName name="android.support.v4.util.LruCache"/>
+<fullyQualifiedTypeName name="com.shange.zhbj.utils.NetCacheUtils"/>
+<fullyQualifiedTypeName name="com.shange.zhbj.utils.LocalCaheUtils"/>
+<fullyQualifiedTypeName name="com.shange.zhbj.utils.MemoryCacheUtils"/>
+<fullyQualifiedTypeName name="com.shange.zhbj.R"/>
+<fullyQualifiedTypeName name="android.graphics.Bitmap"/>
+<fullyQualifiedTypeName name="android.content.Context"/>
+<fullyQualifiedTypeName name="com.shange.zhbj.utils.DensityUtils"/>
 </qualifiedTypeNameHistroy>

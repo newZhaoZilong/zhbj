@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.crypto.spec.IvParameterSpec;
 
+import com.shange.zhbj.utils.DensityUtils;
 import com.shange.zhbj.utils.SpUtils;
 
 import android.app.Activity;
@@ -136,7 +137,7 @@ public class GuideActivity extends Activity {
 					LayoutParams.WRAP_CONTENT);
 			if(i>0){//保证最左边的点是从0开始
 				//设置左边距
-				layoutParams.leftMargin = 20;
+				layoutParams.leftMargin = DensityUtils.dip2px(10, this);
 			}
 			//布局参数是随动的,所以每个view都需要一个,如果尺寸相同可以共用
 			//就记住一个view对应一个布局参数
